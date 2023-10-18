@@ -15,27 +15,28 @@ import java.util.Map;
 @RequestMapping(value = "/v1/members")
 public class MemberController {
 
-    private final Map<Long, Map<String, Object>> members = new HashMap<>();
-
-    @PostConstruct
-    public void init() {
-        Map<String, Object> member1 = new HashMap<>();
-        long memberId = 1L;
-        member1.put("memberId", memberId);
-        member1.put("email", "hgd@gmail.com");
-        member1.put("name", "홍길동");
-        member1.put("phone", "010-1234-5678");
-
-        members.put(memberId, member1);
-    }
+//    private final Map<Long, Map<String, Object>> members = new HashMap<>();
+//
+//    @PostConstruct
+//    public void init() {
+//        Map<String, Object> member1 = new HashMap<>();
+//        long memberId = 1L;
+//        member1.put("memberId", memberId);
+//        member1.put("email", "hgd@gmail.com");
+//        member1.put("name", "홍길동");
+//        member1.put("phone", "010-1234-5678");
+//
+//        members.put(memberId, member1);
+//    }
 
     @PostMapping
-    public ResponseEntity postMember(
+    public ResponseEntity postMember(@RequestBody MemberPostDTO memberPostDTO) {
 //            @RequestHeader("user-agent") String userAgent,
-            @RequestParam("memberId") long memberId,
-            @RequestParam("email") String email,
-            @RequestParam("name") String name,
-            @RequestParam("phone") String phone) {
+//            @RequestParam("memberId") long memberId,
+//            @RequestParam("email") String email,
+//            @RequestParam("name") String name,
+//            @RequestParam("phone") String phone) {
+
 //        System.out.println("# email : " + email);
 //        System.out.println("# name : " + name);
 //        System.out.println("# phone : " + phone);
@@ -47,13 +48,16 @@ public class MemberController {
 //                        "phone\":\"" + phone +
 //                        "\"}";
 //        return response;
-        Map<String, String> map = new HashMap<>();
 
-        map.put("email", email);
-        map.put("name", name);
-        map.put("phone", phone);
-//        System.out.println("user-agent: " + userAgent);
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
+//        Map<String, String> map = new HashMap<>();
+
+//        map.put("email", email);
+//        map.put("name", name);
+//        map.put("phone", phone);
+////        System.out.println("user-agent: " + userAgent);
+//        return new ResponseEntity<>(map, HttpStatus.CREATED);
+//    }
+        return new ResponseEntity<>(memberPostDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/{member-id}")
@@ -73,16 +77,21 @@ public class MemberController {
     }
 
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id") long memberId){
+//    public ResponseEntity patchMember(@PathVariable("member-id") long memberId){
+//
+//        members.get(memberId).put("phone", "010-9876-5432");
+//        return new ResponseEntity<>(members.get(memberId), HttpStatus.CREATED);
+//    }
+    public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
+                                      @RequestBody MemberPatchDTO memberPatchDTO) {
+        memberPatchDTO.setMemberId(memberId);
 
-        members.get(memberId).put("phone", "010-9876-5432");
-        return new ResponseEntity<>(members.get(memberId), HttpStatus.CREATED);
+        return new ResponseEntity<MemberPatchDTO>(memberPatchDTO, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@PathVariable("member-id") long memberId) {
-        members.get(memberId).remove(memberId);
-        return new ResponseEntity<>(members.get(memberId), HttpStatus.NO_CONTENT);
-    }
 
+        return new ResponseEntity<>(memberId, HttpStatus.NO_CONTENT);
+    }
 }
