@@ -80,6 +80,7 @@ public class CoffeeController {
 
     @DeleteMapping("/{coffee-id}")
     public ResponseEntity deleteCoffee(@PathVariable("coffee-id") long coffeeId){
+        coffees.remove(coffeeId);
         return new ResponseEntity<>(coffees.get(coffeeId), HttpStatus.NO_CONTENT);
     }
 }
