@@ -3,9 +3,12 @@ package com.cryptossu.review.section3.springMVC.member;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import java.util.Map;
 
 //@RequestMapping(value = "/v1/members", produces = {MediaType.APPLICATION_JSON_VALUE})
 @RequestMapping(value = "/v1/members")
+@Validated
 public class MemberController {
 
 //    private final Map<Long, Map<String, Object>> members = new HashMap<>();
@@ -30,7 +34,7 @@ public class MemberController {
 //    }
 
     @PostMapping
-    public ResponseEntity postMember(@RequestBody MemberPostDTO memberPostDTO) {
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDTO memberPostDTO) {
 //            @RequestHeader("user-agent") String userAgent,
 //            @RequestParam("memberId") long memberId,
 //            @RequestParam("email") String email,
@@ -83,7 +87,7 @@ public class MemberController {
 //        return new ResponseEntity<>(members.get(memberId), HttpStatus.CREATED);
 //    }
     public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
-                                      @RequestBody MemberPatchDTO memberPatchDTO) {
+                                      @Valid @RequestBody MemberPatchDTO memberPatchDTO) {
         memberPatchDTO.setMemberId(memberId);
 
         return new ResponseEntity<MemberPatchDTO>(memberPatchDTO, HttpStatus.CREATED);

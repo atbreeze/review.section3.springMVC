@@ -2,15 +2,19 @@ package com.cryptossu.review.section3.springMVC.coffee;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 //@RequestMapping(value = "/v1/coffees", produces = {MediaType.APPLICATION_JSON_VALUE})
 @RequestMapping(value = "/v1/coffees")
+@Validated
 public class CoffeeController {
 
 //    private final Map<Long, Map<String, Object>> coffees = new HashMap<>();
@@ -53,7 +57,7 @@ public class CoffeeController {
 //        return new ResponseEntity<>(map, HttpStatus.CREATED);
 //    }
 
-    public ResponseEntity postCoffee(@RequestBody CoffeePostDTO coffeePostDTO) {
+    public ResponseEntity postCoffee(@Valid @RequestBody CoffeePostDTO coffeePostDTO) {
         return new ResponseEntity<>(coffeePostDTO, HttpStatus.CREATED);
     }
 
@@ -82,8 +86,8 @@ public class CoffeeController {
 //        return new ResponseEntity<>(coffees.get(coffeeId), HttpStatus.CREATED);
 //    }
 
-    public ResponseEntity patchCoffee(@PathVariable("coffee-id") long coffeeId,
-                                      @RequestBody CoffeePatchDTO coffeePatchDTO) {
+    public ResponseEntity patchCoffee(@PathVariable("coffee-id") @Min(1) long coffeeId,
+                                      @Valid @RequestBody CoffeePatchDTO coffeePatchDTO) {
         coffeePatchDTO.setCoffeeId(coffeeId);
 
         return new ResponseEntity(coffeePatchDTO, HttpStatus.CREATED);
