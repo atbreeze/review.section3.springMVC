@@ -1,50 +1,43 @@
-package com.cryptossu.review.section3.springMVC.coffee;
+package com.cryptossu.review.section3.springMVC.coffee.dto;
 
-import com.cryptossu.review.section3.springMVC.NotSpace;
-import org.hibernate.validator.constraints.Range;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public class CoffeePatchDTO {
-
-    private long coffeeId;
+public class CoffeePostDTO {
     @NotBlank(message = "Type in your Name")
-    @Pattern(regexp = "^([a-zA-Z]\\s?)+\\S$")
+    @Pattern(regexp = "^([a-zA-Z]+)(\\s?[a-zA-Z])*$")
+    //영문만 허용
+    // 워드 사이에 한칸의 공백만 포함
     private String engName;
     @NotBlank(message = "상품명을 입력하세요")
     private String korName;
+    @Min(1000)
+    @Max(50000)
     private int price;
-
-    public void setCoffeeId(long coffeeId) {
-        this.coffeeId = coffeeId;
-    }
 
     public void setEngName(String engName) {
         this.engName = engName;
-    }
-
-    public void setKorName(String korName) {
-        this.korName = korName;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
-    public long getCoffeeId() {
-        return coffeeId;
+    public void setKorName(String korName) {
+        this.korName = korName;
     }
 
     public String getEngName() {
         return engName;
     }
 
-    public String getKorName() {
-        return korName;
-    }
-
     public int getPrice() {
         return price;
+    }
+
+    public String getKorName() {
+        return korName;
     }
 }
