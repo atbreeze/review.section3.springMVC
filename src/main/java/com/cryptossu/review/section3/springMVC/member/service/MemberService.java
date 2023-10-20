@@ -1,5 +1,6 @@
-package com.cryptossu.review.section3.springMVC.member;
+package com.cryptossu.review.section3.springMVC.member.service;
 
+import com.cryptossu.review.section3.springMVC.member.entity.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -31,8 +31,8 @@ public class CoffeeController {
 //        coffees.put(coffeeId, coffee1);
 //    }
 
-    @PostMapping
-//    public ResponseEntity postCoffee(@RequestParam("korName") String korName,
+
+    //    public ResponseEntity postCoffee(@RequestParam("korName") String korName,
 //                                     @RequestParam("engName") String engName,
 //                                     @RequestParam("price") int price
 //    ) {
@@ -56,7 +56,7 @@ public class CoffeeController {
 //
 //        return new ResponseEntity<>(map, HttpStatus.CREATED);
 //    }
-
+    @PostMapping
     public ResponseEntity postCoffee(@Valid @RequestBody CoffeePostDTO coffeePostDTO) {
         return new ResponseEntity<>(coffeePostDTO, HttpStatus.CREATED);
     }

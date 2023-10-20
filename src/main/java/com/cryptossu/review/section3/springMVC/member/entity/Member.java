@@ -1,4 +1,4 @@
-package com.cryptossu.review.section3.springMVC.member;
+package com.cryptossu.review.section3.springMVC.member.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
