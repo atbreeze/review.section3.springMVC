@@ -1,7 +1,5 @@
 package com.cryptossu.review.section3.springMVC.member.dto;
 
-import com.cryptossu.review.section3.springMVC.NotSpace;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 

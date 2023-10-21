@@ -1,6 +1,5 @@
 package com.cryptossu.review.section3.springMVC.member.controller;
 
-import com.cryptossu.review.section3.springMVC.ErrorResponse;
 import com.cryptossu.review.section3.springMVC.member.mapstruct.MemberMapper;
 import com.cryptossu.review.section3.springMVC.member.dto.MemberPatchDTO;
 import com.cryptossu.review.section3.springMVC.member.dto.MemberPostDTO;
@@ -11,13 +10,10 @@ import com.cryptossu.review.section3.springMVC.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 //import com.cryptossu.review.section3.springMVC.member.mapstruct.MemberMapper;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;

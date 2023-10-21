@@ -1,13 +1,12 @@
-package com.cryptossu.review.section3.springMVC;
+package com.cryptossu.review.section3.springMVC.member.response;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.validation.FieldError;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.OverridesAttribute;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,8 +17,20 @@ public class ErrorResponse {
 
     private List<FieldError> fieldErrors;
     private List<ConstraintViolationError> violationErrors;
+    private int status;
+    private String message;
 
     private ErrorResponse(List<FieldError> fieldErrors, List<ConstraintViolationError> violationErrors) {
+        this.fieldErrors = fieldErrors;
+        this.violationErrors = violationErrors;
+    }
+
+    private ErrorResponse(int status,
+                          final String message,
+                          final List<FieldError> fieldErrors,
+                          final List<ConstraintViolationError> violationErrors) {
+        this.status = status;
+        this.message =message;
         this.fieldErrors = fieldErrors;
         this.violationErrors = violationErrors;
     }
@@ -30,6 +41,10 @@ public class ErrorResponse {
 
     public static ErrorResponse of(Set<ConstraintViolation<?>> violations) {
         return new ErrorResponse(null, ConstraintViolationError.of(violations));
+    }
+
+    public static ErrorResponse of(int status, String message) {
+        return new ErrorResponse(status, message, null, null);
     }
 
     @Getter

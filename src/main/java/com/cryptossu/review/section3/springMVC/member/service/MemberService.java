@@ -1,5 +1,7 @@
 package com.cryptossu.review.section3.springMVC.member.service;
 
+import com.cryptossu.review.section3.springMVC.member.exception.BusinessLogicException;
+import com.cryptossu.review.section3.springMVC.member.exception.ExceptionCode;
 import com.cryptossu.review.section3.springMVC.member.entity.Member;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,17 @@ public class MemberService {
 
     public Member updateMember(Member member) {
 
-        Member updatedMember = member;
-        return updatedMember;
+//        Member updatedMember = member;
+//        return updatedMember;
+        throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
     }
 
     public Member findMember(long memberId) {
-        Member member = new Member(memberId, "cryptossu@gmail.com", "cryptossu", "010-9876-5432");
-        return member;
+//        Member member = new Member(memberId, "cryptossu@gmail.com", "cryptossu", "010-9876-5432");
+//        return member;
+        throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
     }
+
 
     public List<Member> findMembers() {
         List<Member> members = List.of(
@@ -34,5 +39,6 @@ public class MemberService {
 
     public void deleteMember(long memberId) {
 
+        throw new BusinessLogicException(ExceptionCode.INTERNAL_SEVER_ERROR);
     }
 }

@@ -1,10 +1,6 @@
 package com.cryptossu.review.section3.springMVC.coffee.dto;
 
-import com.cryptossu.review.section3.springMVC.NotSpace;
-import org.hibernate.validator.constraints.Range;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 public class CoffeePatchDTO {
 

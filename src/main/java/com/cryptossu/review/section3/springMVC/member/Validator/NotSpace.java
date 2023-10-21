@@ -1,4 +1,4 @@
-package com.cryptossu.review.section3.springMVC;
+package com.cryptossu.review.section3.springMVC.member.Validator;
 
 import org.hibernate.validator.internal.constraintvalidators.bv.NotBlankValidator;
 
