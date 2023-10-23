@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.annotation.Id;
+
 @Getter
 //게터 자동생성
 @Setter
@@ -20,6 +22,7 @@ import org.springframework.boot.SpringApplication;
 //        this.phone = phone;
 //        }
 public class Member {
+    @Id
     private long memberId;
     private String email;
     private String name;
