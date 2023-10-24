@@ -8,7 +8,6 @@ import javax.validation.constraints.Positive;
 @Getter
 @AllArgsConstructor
 public class OrderCoffeeDto {
-
     @Positive
     private long coffeeId;
 
