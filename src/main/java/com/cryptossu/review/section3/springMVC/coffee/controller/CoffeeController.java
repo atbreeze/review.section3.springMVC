@@ -19,7 +19,7 @@ import javax.validation.constraints.Min;
 
 @RestController
 //@RequestMapping(value = "/v1/coffees", produces = {MediaType.APPLICATION_JSON_VALUE})
-@RequestMapping(value = "/v5/coffees")
+@RequestMapping(value = "/v10/coffees")
 @Validated
 public class CoffeeController {
 //    private final Map<Long, Map<String, Object>> coffees = new HashMap<>();

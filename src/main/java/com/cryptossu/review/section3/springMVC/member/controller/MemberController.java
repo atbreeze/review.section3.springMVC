@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 
-@RequestMapping(value = "/v6/members")
+@RequestMapping(value = "/v10/members")
 //v5 mapStruct 활용한 Mapper 자동 생성으로 Mapper 인터페이스 컨트롤러 적용
 //@RequestMapping(value = "/v4/members")
 //Mapper클래스 직접 생성을 통한 DTO <-> Member 변환 기능 컨트롤러에서 분리

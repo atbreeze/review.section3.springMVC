@@ -24,6 +24,7 @@ public class CoffeeService {
 //        Coffee createCoffee = coffee;
 //        return createCoffee;
         String coffeeCode = coffee.getCoffeeCode().toUpperCase();
+
         verifyExistsCoffee(coffeeCode);
         coffee.setCoffeeCode(coffeeCode);
 
@@ -34,6 +35,7 @@ public class CoffeeService {
 //        Coffee updateCoffee = coffee;
 //        return updateCoffee;
         Coffee findCoffee = findVerifiedCoffee(coffee.getCoffeeId());
+
         Optional.ofNullable(coffee.getKorName())
                 .ifPresent(korName -> findCoffee.setKorName(korName));
         Optional.ofNullable(coffee.getEngName())
