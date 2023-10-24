@@ -14,6 +14,8 @@ public interface CoffeeRepository extends CrudRepository<Coffee, Long> {
 
     @Override
     Optional<Coffee> findById(Long id);
+
+    Optional<Coffee> findByCoffee(Long coffeeId);
     //쿼리문을 직접 사용해서 복잡한 쿼리문을 작성할 수 있다.
 //    @Query("SELECT * FROM COFFEE WHERE COFFEE_ID = :coffeeId")
 //    Optional<Coffee> findByCoffee(Long coffeeId);

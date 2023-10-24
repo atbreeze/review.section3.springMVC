@@ -1,5 +1,6 @@
-package com.cryptossu.review.section3.springMVC.order;
+package com.cryptossu.review.section3.springMVC.order.entity;
 
+import com.cryptossu.review.section3.springMVC.order.OrderCoffee;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
