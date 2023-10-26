@@ -7,7 +7,10 @@ import com.cryptossu.review.section3.springMVC.member.dto.MemberResponseDto;
 import com.cryptossu.review.section3.springMVC.member.entity.Member;
 import com.cryptossu.review.section3.springMVC.member.service.MemberService;
 
+import com.cryptossu.review.section3.springMVC.response.MultiResponseDto;
+import com.cryptossu.review.section3.springMVC.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 //import com.cryptossu.review.section3.springMVC.member.mapstruct.MemberMapper;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +34,7 @@ import java.util.stream.Collectors;
 @Validated
 @Slf4j
 public class MemberController {
+    private final static String MEMBER_DEFAULT_URL = "/v10/members";
     private final MemberService memberService;
     private final MemberMapper mapper;
 
@@ -46,11 +52,16 @@ public class MemberController {
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDTO memberPostDTO) {
 
-        Member member = mapper.memberPostDtoToMember(memberPostDTO);
-        Member response = memberService.createMember(member);
+        Member member = memberService.createMember(mapper.memberPostDtoToMember(memberPostDTO));
+        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, member.getMemberId());
 
-        return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.CREATED);
+        return ResponseEntity.created(location).build();
     }
+//        Member member = mapper.memberPostDtoToMember(memberPostDTO);
+//        Member response = memberService.createMember(member);
+//
+//        return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.CREATED);
+//    }
 
 //        Member member = new Member();
 //        member.setEmail(memberPostDTO.getEmail());
@@ -70,26 +81,30 @@ public class MemberController {
     }
 
     @GetMapping()
-    public ResponseEntity getMembers() {
+    public ResponseEntity getMembers(@Positive @RequestParam int page, @Positive @RequestParam int size) {
 
 //        List<Member> response = memberService.findMembers();
 //
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
-        List<Member> members = memberService.findMembers();
+//        List<Member> members = memberService.findMembers();
+//
+//        List<MemberResponseDto> response =
+//                members.stream()
+//                        .map(member -> mapper.memberToMemberResponseDto(member))
+//                        .collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+        Page<Member> pageMembers = memberService.findMembers(page, size);
+        List<Member> members = pageMembers.getContent();
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.membersToMemberResponseDto(members), pageMembers), HttpStatus.OK);
 
-        List<MemberResponseDto> response =
-                members.stream()
-                        .map(member -> mapper.memberToMemberResponseDto(member))
-                        .collect(Collectors.toList());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
     @PatchMapping("/{member-id}")
 
-    public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
+    public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @Valid @RequestBody MemberPatchDTO memberPatchDTO) {
         memberPatchDTO.setMemberId(memberId);
 

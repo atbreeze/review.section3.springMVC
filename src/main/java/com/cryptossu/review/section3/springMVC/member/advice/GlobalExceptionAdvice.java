@@ -1,6 +1,6 @@
 package com.cryptossu.review.section3.springMVC.member.advice;
 
-import com.cryptossu.review.section3.springMVC.member.response.ErrorResponse;
+import com.cryptossu.review.section3.springMVC.response.ErrorResponse;
 import com.cryptossu.review.section3.springMVC.member.exception.BusinessLogicException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

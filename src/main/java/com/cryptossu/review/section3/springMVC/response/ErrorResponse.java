@@ -1,4 +1,4 @@
-package com.cryptossu.review.section3.springMVC.member.response;
+package com.cryptossu.review.section3.springMVC.response;
 
 import org.springframework.validation.BindingResult;
 
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.OverridesAttribute;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

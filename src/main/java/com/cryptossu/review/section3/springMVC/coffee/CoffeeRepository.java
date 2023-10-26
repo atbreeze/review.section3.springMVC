@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface CoffeeRepository extends CrudRepository<Coffee, Long> {
     Optional<Coffee> findByCoffeeCode(String coffeeCode);
 
-    @Query("SELECT * FROM COFFEE WHERE COFFEE_ID = :coffeeId")
     Optional<Coffee> findById(Long coffeeId);
 
     @Query("SELECT * FROM COFFEE WHERE COFFEE_ID = :coffeeId")

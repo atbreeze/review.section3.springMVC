@@ -4,6 +4,10 @@ import com.cryptossu.review.section3.springMVC.member.MemberRepository;
 import com.cryptossu.review.section3.springMVC.member.exception.BusinessLogicException;
 import com.cryptossu.review.section3.springMVC.member.exception.ExceptionCode;
 import com.cryptossu.review.section3.springMVC.member.entity.Member;
+import com.cryptossu.review.section3.springMVC.member.mapstruct.MemberMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +43,15 @@ public class MemberService {
         return memberRepository.save(findMember);
     }
 
+//    public Member UpdateMemberV2(Member member){
+//        Member findMember = findVerifiedMember(member.getMemberId());
+//
+//        Member updatingMember = beanUtils.copyNonNullProperties(member, findMember);
+//        return memberRepository.save(updatingMember);
+//    }
+
+
+
     public Member findMember(long memberId) {
 //        Member member = new Member(memberId, "cryptossu@gmail.com", "cryptossu", "010-9876-5432");
 //        return member;
@@ -46,15 +59,18 @@ public class MemberService {
         return findVerifiedMember(memberId);
     }
 
-    public List<Member> findMembers() {
-//        List<Member> members = List.of(
-//                new Member(1, "cryptossu@gmail.com", "cryptossu", "010-9876-5432"),
-//                new Member(2, "atbreeze@gmail.com", "atbreeze", "010-1234-5678")
-//        );
-//        return members;
-        return (List<Member>) memberRepository.findAll();
-    }
+//    public List<Member> findMembers() {
+////        List<Member> members = List.of(
+////                new Member(1, "cryptossu@gmail.com", "cryptossu", "010-9876-5432"),
+////                new Member(2, "atbreeze@gmail.com", "atbreeze", "010-1234-5678")
+////        );
+////        return members;
+//        return (List<Member>) memberRepository.findAll();
+//    }
 
+    public Page<Member> findMembers(int page, int size) {
+        return memberRepository.findAll(PageRequest.of(page -1, size, Sort.by("memberId").descending()));
+    }
     public void deleteMember(long memberId) {
 //        throw new BusinessLogicException(ExceptionCode.INTERNAL_SEVER_ERROR);
         Member findMember = findVerifiedMember(memberId);
